@@ -1,0 +1,12 @@
+{
+  "usuarios": [
+    { "id": 1, "usuario": "admin", "password": "1234" }
+  ],
+  "proyectos": [
+    { "id": 1, "nombre": "Proyecto A", "descripcion": "Proyecto inicial" }
+  ],
+  "tareas": [
+    { "id": 1, "projectId": 1, "titulo": "Tarea 1", "estado": "Pendiente" },
+    { "id": 2, "projectId": 1, "titulo": "Tarea 2", "estado": "Completada" }
+  ]
+}

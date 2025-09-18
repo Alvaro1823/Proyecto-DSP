@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import Link from 'next/link'
+import { Form, Button, Card, Container } from 'react-bootstrap'
 
 export default function RegisterPage() {
   const [usuario, setUsuario] = useState('')
@@ -9,79 +9,33 @@ export default function RegisterPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
-    if (password !== confirmPassword) {
+    if(password !== confirmPassword) {
       alert('Las contraseñas no coinciden')
       return
     }
-
     alert(`Registrar usuario: ${usuario} (por implementar)`)
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-md p-8">
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
-          Crear cuenta
-        </h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Usuario
-            </label>
-            <input
-              type="text"
-              value={usuario}
-              onChange={(e) => setUsuario(e.target.value)}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
-              placeholder="Elige un usuario"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Contraseña
-            </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
-              placeholder="Crea una contraseña"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Confirmar contraseña
-            </label>
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
-              placeholder="Repite la contraseña"
-              required
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition"
-          >
-            Registrarse
-          </button>
-        </form>
-
-        <p className="text-center text-sm text-gray-600 mt-4">
-          ¿Ya tienes cuenta?{' '}
-          <Link href="/auth/login" className="text-green-600 hover:underline">
-            Inicia sesión
-          </Link>
-        </p>
-      </div>
-    </div>
+    <Container className="d-flex justify-content-center align-items-center vh-100">
+      <Card className="p-4 shadow" style={{ width: '24rem' }}>
+        <h2 className="text-center mb-4">Crear cuenta</h2>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3">
+            <Form.Label>Usuario</Form.Label>
+            <Form.Control type="text" value={usuario} onChange={e => setUsuario(e.target.value)} required/>
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Contraseña</Form.Label>
+            <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} required/>
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Confirmar contraseña</Form.Label>
+            <Form.Control type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} required/>
+          </Form.Group>
+          <Button type="submit" variant="success" className="w-100">Registrarse</Button>
+        </Form>
+      </Card>
+    </Container>
   )
 }

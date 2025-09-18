@@ -1,67 +1,54 @@
 'use client'
 import { useState } from 'react'
-import Link from 'next/link'
-
+import { useRouter } from 'next/navigation'
+import { Form, Button, Card, Container } from 'react-bootstrap'
 
 export default function LoginPage() {
   const [usuario, setUsuario] = useState('')
   const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
+  const router = useRouter()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    alert(`Login de ${usuario} (por implementar)`)
+    setLoading(true)
+    try {
+      const res = await fetch('/data.json')
+      const json = await res.json()
+      const user = json.usuarios.find(u => u.usuario === usuario && u.password === password)
+      if (user) {
+        // aquí podrías setear un "session" en localStorage o context (demo)
+        localStorage.setItem('user', JSON.stringify({ id: user.id, usuario: user.usuario }))
+        router.push('/dashboard')
+      } else {
+        alert('Usuario o contraseña incorrectos')
+      }
+    } catch (err) {
+      alert('Error al autenticar')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-md p-8">
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
-          Iniciar sesión
-        </h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Usuario
-            </label>
-            <input
-              type="text"
-              value={usuario}
-              onChange={(e) => setUsuario(e.target.value)}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
-              placeholder="Tu usuario"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Contraseña
-            </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
-              placeholder="Tu contraseña"
-              required
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
-          >
-            Entrar
-          </button>
-        </form>
-
-        <p className="text-center text-sm text-gray-600 mt-4">
-          ¿No tienes cuenta?{' '}
-          <Link href="/auth/register" className="text-blue-600 hover:underline">
-            Regístrate
-          </Link>
-        </p>
-      </div>
-    </div>
+    <Container className="d-flex justify-content-center align-items-center vh-100">
+      <Card className="p-4 shadow" style={{ width: '24rem' }}>
+        <h2 className="text-center mb-4">Iniciar sesión</h2>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3">
+            <Form.Label>Usuario</Form.Label>
+            <Form.Control type="text" value={usuario} onChange={e => setUsuario(e.target.value)} required />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Contraseña</Form.Label>
+            <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} required />
+          </Form.Group>
+          <Button type="submit" variant="primary" className="w-100" disabled={loading}>
+            {loading ? 'Validando...' : 'Entrar'}
+          </Button>
+        </Form>
+      </Card>
+    </Container>
   )
 }
+
