@@ -1,32 +1,64 @@
 'use client'
-
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { Container, Row, Col, Button, Card } from 'react-bootstrap'
+import { Container, Card, Button, Form, Row, Col } from 'react-bootstrap'
 
-export default function ProyectosPage() 
-{
+export default function ProyectosPage() {
+  const [data, setData] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [newTitle, setNewTitle] = useState('')
+
+  useEffect(() => {
+    fetch('/data.json')
+      .then(res => res.json())
+      .then(json => {
+        setData(json)
+        setLoading(false)
+      })
+      .catch(() => setLoading(false))
+  }, [])
+
+  if (loading) return <Container className="mt-5">Cargando...</Container>
+  if (!data) return <Container className="mt-5">No hay datos</Container>
+
+  const addProject = (e) => {
+    e.preventDefault()
+    if (!newTitle) return
+    const newProject = { id: Date.now(), nombre: newTitle, descripcion: '' }
+    // actualizamos solo en memoria
+    setData({ ...data, proyectos: [...data.proyectos, newProject] })
+    setNewTitle('')
+  }
+
   return (
     <Container className="mt-5">
-      <Row className="mb-4">
+      <Row className="mb-3">
         <Col>
-          <h2>Mis Proyectos</h2>
-        </Col>
-        <Col className="text-end">
-          <Link href="/dashboard">
-            <Button variant="secondary">⬅ Volver al Dashboard</Button>
-          </Link>
+          <h2>Proyectos</h2>
         </Col>
       </Row>
 
-      {/* Aquí lista de proyectos (se puede mejorar luego) */}
-      <Card className="p-3 shadow-sm">
-        <Card.Body>
-          <Card.Title>Proyecto de Ejemplo</Card.Title>
-          <Card.Text>Descripción breve del proyecto.</Card.Text>
-          <Button variant="primary">Ver Detalles</Button>
-        </Card.Body>
-      </Card>
+      <Form onSubmit={addProject} className="d-flex mb-3">
+        <Form.Control
+          type="text"
+          placeholder="Nuevo proyecto"
+          value={newTitle}
+          onChange={(e) => setNewTitle(e.target.value)}
+        />
+        <Button type="submit" variant="success" className="ms-2">Agregar</Button>
+      </Form>
+
+      {data.proyectos.map((p) => (
+        <Card key={p.id} className="mb-2 p-2">
+          <Card.Body>
+            <Card.Title>{p.nombre}</Card.Title>
+            <Card.Text>{p.descripcion}</Card.Text>
+            <Link href={`/proyectos/${p.id}`} className="text-decoration-none">
+              <Button variant="primary">Ver Tareas</Button>
+            </Link>
+          </Card.Body>
+        </Card>
+      ))}
     </Container>
   )
 }
-
