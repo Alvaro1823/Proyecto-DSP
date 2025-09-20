@@ -70,7 +70,7 @@ export default function DashboardPage() {
             <Card.Body>
               <Card.Title>Proyectos</Card.Title>
               <Card.Text>Tienes {data.proyectos.length} proyecto(s)</Card.Text>
-              <Link href="/proyectos" className="text-decoration-none">
+              <Link href="/proyectos/" className="text-decoration-none">
                 <Button variant="primary">Ver proyectos</Button>
               </Link>
             </Card.Body>
@@ -84,7 +84,7 @@ export default function DashboardPage() {
               <Card.Text>
                 {pendientes} pendientes · {completadas} completadas
               </Card.Text>
-              <Link href="/tareas" className="text-decoration-none">
+              <Link href="/mostrar/" className="text-decoration-none">
                 <Button variant="success">Ver tareas</Button>
               </Link>
             </Card.Body>
