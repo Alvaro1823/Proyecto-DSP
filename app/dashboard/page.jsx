@@ -12,12 +12,18 @@ import {
   Legend,
   ResponsiveContainer
 } from 'recharts'
+import { useRouter } from 'next/navigation'
 
 export default function DashboardPage() {
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-
+  const router = useRouter()
+  const handleLogout = () => {
+    if (confirm('¿Está seguro que desea salir?')) {
+      router.push('/')
+    }
+  }
   useEffect(() => {
     setLoading(true)
     fetch('/data.json')
@@ -60,10 +66,14 @@ export default function DashboardPage() {
     { name: 'Completadas', value: completadas }
   ]
 
-  return (
-    <Container className="mt-4">
-      <h2>Panel de Control</h2>
 
+  return (
+      <Container className="mt-4">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+      <h2>Panel de Control</h2>
+      <Button variant="danger" onClick={handleLogout}>Salir</Button>
+      </div>
+      
       <Row className="mt-4">
         <Col md={6} className="mb-3">
           <Card>
@@ -112,3 +122,4 @@ export default function DashboardPage() {
     </Container>
   )
 }
+
