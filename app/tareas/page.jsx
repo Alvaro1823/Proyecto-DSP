@@ -7,11 +7,7 @@ import { useState, useEffect } from 'react'
 export default function TareasPage() {
   const [usuarioId, setUsuarioId] = useState(null)
   const [mostrar, setMostrar] = useState(false)
-  const [tareas, setTareas] = useState([
-    { id: 1, titulo: 'Tarea 1', estado: 'Pendiente', asignadoA: 1 },
-    { id: 2, titulo: 'Tarea 2', estado: 'Completada', asignadoA: 2 },
-    { id: 3, titulo: 'Tarea 3', estado: 'Pendiente', asignadoA: 1 }
-  ])
+  const [tareas, setTareas] = useState([])
   const [nuevoTitulo, setNuevoTitulo] = useState('')
   const [nuevoEstado, setNuevoEstado] = useState('Pendiente')
 
