@@ -40,16 +40,9 @@
       "generalProgress": 0
     },
     {
-      "id": "4704",
-      "name": "dad",
-      "description": "ad",
-      "managerId": 1,
-      "generalProgress": 0
-    },
-    {
       "id": "e657",
-      "name": "dgfg",
-      "description": "dgdg",
+      "name": "dgfg45",
+      "description": "dgdg45",
       "managerId": 1,
       "generalProgress": 0
     },
@@ -64,6 +57,20 @@
       "id": "0aec",
       "name": "dsp",
       "description": "dsp",
+      "managerId": 1,
+      "generalProgress": 0
+    },
+    {
+      "id": "3b9f",
+      "name": "creaccion del login",
+      "description": "asdd",
+      "managerId": 1,
+      "generalProgress": 0
+    },
+    {
+      "id": "17c3",
+      "name": "registrar",
+      "description": "123",
       "managerId": 1,
       "generalProgress": 0
     }

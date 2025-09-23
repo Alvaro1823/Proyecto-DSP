@@ -133,6 +133,13 @@ export default function ProyectosPage() {
         <Col>
           <h1 className="fw-bold text-primary">Gestor de Proyectos</h1>
           <p className="lead text-muted">Crea y administra tus proyectos y tareas fácilmente.</p>
+      <div className="mb-3">
+        
+        <Link href="/dashboard">
+          <Button variant="secondary">⬅ Volver al Panel de Control</Button>
+        </Link>
+
+      </div>
         </Col>
       </Row>
 

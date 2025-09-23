@@ -88,6 +88,13 @@ export default function ProyectosPage() {
   return (
     <Container className="mt-5">
       <Row className="mb-3">
+      <Col>
+        <Link href="/dashboard">
+          <Button variant="secondary">⬅ Volver al Panel de Control</Button>
+        </Link>
+      </Col>
+    </Row>
+      <Row className="mb-3">
         <Col>
           <h2>Lista de Proyectos</h2>
         </Col>
