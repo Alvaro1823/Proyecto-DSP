@@ -94,7 +94,7 @@ export default function DashboardPage() {
               <Card.Text>
                 {pendientes} pendientes · {completadas} completadas
               </Card.Text>
-              <Link href="/mostrar/" className="text-decoration-none">
+              <Link href="/tarea/" className="text-decoration-none">
                 <Button variant="success">Ver tareas</Button>
               </Link>
             </Card.Body>
