@@ -1,4 +1,5 @@
 'use client'
+
 import Link from 'next/link'
 import { Container, Button, Table } from 'react-bootstrap'
 
@@ -35,3 +36,4 @@ export default function TareasPage() {
     </Container>
   )
 }
+
