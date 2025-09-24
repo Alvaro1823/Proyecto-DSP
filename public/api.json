@@ -1,0 +1,100 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "manager",
+      "password": "password123",
+      "role": "manager"
+    },
+    {
+      "id": "2",
+      "username": "user",
+      "password": "password456",
+      "role": "user"
+    },
+    {
+      "id": "3",
+      "username": "daniel",
+      "password": "password456",
+      "role": "user"
+    },
+    {
+      "id": "6225",
+      "username": "alvaro1234",
+      "password": "alvaro1234",
+      "role": "user"
+    },
+    {
+      "id": "9d64",
+      "username": "alvaro",
+      "password": "1234",
+      "role": "user"
+    },
+    {
+      "id": "dbef",
+      "username": "dav",
+      "password": "1234",
+      "role": "user"
+    }
+  ],
+  "projects": [
+    {
+      "id": "1840",
+      "name": "prueba 65",
+      "description": "prueba 5",
+      "managerId": 1,
+      "generalProgress": 0
+    },
+    {
+      "id": "e657",
+      "name": "dgfg45",
+      "description": "dgdg45",
+      "managerId": 1,
+      "generalProgress": 0
+    },
+    {
+      "id": "c230",
+      "name": "dprueba 4",
+      "description": "dprueba 4",
+      "managerId": 1,
+      "generalProgress": 0
+    },
+    {
+      "id": "0aec",
+      "name": "dsp",
+      "description": "dsp",
+      "managerId": 1,
+      "generalProgress": 0
+    },
+    {
+      "id": "3b9f",
+      "name": "creaccion del login",
+      "description": "asdd",
+      "managerId": 1,
+      "generalProgress": 0
+    },
+    {
+      "id": "17c3",
+      "name": "registrar",
+      "description": "123",
+      "managerId": 1,
+      "generalProgress": 0
+    }
+  ],
+  "tasks": [
+    {
+      "id": "1",
+      "projectId": 1,
+      "title": "Crear UI de login",
+      "assignedTo": "user",
+      "completed": false
+    },
+    {
+      "id": "2",
+      "projectId": 1,
+      "title": "Implementar API de proyectos",
+      "assignedTo": "manager",
+      "completed": true
+    }
+  ]
+}

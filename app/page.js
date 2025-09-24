@@ -17,12 +17,12 @@ export default function HomePage() {
                 Inicia sesión o regístrate para comenzar.
               </Card.Text>
               <div>
-                <Link href="/auth/login">
+                <Link href="/auth/login" passHref legacyBehavior>
                   <Button variant="primary" className="me-3">
                     Iniciar Sesión
                   </Button>
                 </Link>
-                <Link href="/auth/register">
+                <Link href="/auth/register" passHref legacyBehavior>
                   <Button variant="success">
                     Registrarse
                   </Button>
