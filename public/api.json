@@ -73,6 +73,13 @@
       "description": "123",
       "managerId": 1,
       "generalProgress": 0
+    },
+    {
+      "id": "d595",
+      "name": "carrito de compra",
+      "description": "javascript\n",
+      "managerId": 1,
+      "generalProgress": 0
     }
   ],
   "tasks": [
@@ -88,6 +95,48 @@
       "projectId": 1,
       "title": "Implementar API de proyectos",
       "assignedTo": "manager",
+      "completed": true
+    },
+    {
+      "id": "861e",
+      "title": "mejorar vista22",
+      "description": "mejorar vista",
+      "projectId": "1840",
+      "completed": false
+    },
+    {
+      "id": "33ac",
+      "title": "prueba 3",
+      "description": "prueba 3",
+      "projectId": "1840",
+      "completed": true
+    },
+    {
+      "id": "52b8",
+      "title": "tareas2",
+      "description": "tareas2",
+      "projectId": "e657",
+      "completed": false
+    },
+    {
+      "id": "f7f4",
+      "title": "tareas4",
+      "description": "tareas4",
+      "projectId": "e657",
+      "completed": true
+    },
+    {
+      "id": "9503",
+      "title": "crear login ",
+      "description": "crear login ",
+      "projectId": "d595",
+      "completed": false
+    },
+    {
+      "id": "d6f2",
+      "title": "Diseño de vistas",
+      "description": "Diseño de vistas",
+      "projectId": "d595",
       "completed": true
     }
   ]

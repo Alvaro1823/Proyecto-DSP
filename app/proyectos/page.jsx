@@ -234,8 +234,8 @@ export default function ProyectosPage() {
                       <Card.Text className="text-muted flex-grow-1">{p.description}</Card.Text>
                       <div className="mt-auto d-flex justify-content-between align-items-center">
                         <Link href={`/proyectos/${p.id}`} passHref>
-                          <Button variant="info" size="sm">Ver Tareas</Button>
-                        </Link>
+  <Button variant="info" size="sm">Ver Tareas</Button>
+</Link>
                         <div>
                           <Button variant="outline-secondary" size="sm" className="me-2" onClick={() => startEditing(p)}>
                             Editar
