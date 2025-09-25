@@ -29,13 +29,19 @@
       "username": "alvaro",
       "password": "1234",
       "role": "user"
+    },
+    {
+      "id": "dbef",
+      "username": "dav",
+      "password": "1234",
+      "role": "user"
     }
   ],
   "projects": [
     {
       "id": "1840",
       "name": "prueba 65",
-      "description": "prueba 6",
+      "description": "prueba 5",
       "managerId": 1,
       "generalProgress": 0
     },
