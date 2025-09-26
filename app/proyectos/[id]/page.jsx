@@ -12,12 +12,19 @@ export default function ProyectoDetallePage() {
 
   const [newTaskTitle, setNewTaskTitle] = useState('')
   const [newTaskDescription, setNewTaskDescription] = useState('')
+  const [newTaskAssignedTo, setNewTaskAssignedTo] = useState('')
   const [loadingNewTask, setLoadingNewTask] = useState(false)
   const [newTaskError, setNewTaskError] = useState(null)
   const [successMessage, setSuccessMessage] = useState(null)
 
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
   const [taskToDelete, setTaskToDelete] = useState(null)
+
+  // NUEVOS ESTADOS PARA LA EDICIÓN
+  const [showEditModal, setShowEditModal] = useState(false)
+  const [taskToEdit, setTaskToEdit] = useState(null)
+  const [editFormTitle, setEditFormTitle] = useState('')
+  const [editFormDescription, setEditFormDescription] = useState('')
 
   useEffect(() => {
     fetchProyectoYTareas()
@@ -52,8 +59,9 @@ export default function ProyectoDetallePage() {
         description: newTaskDescription,
         projectId: id,
         completed: false,
+        assignedTo: newTaskAssignedTo || 'Sin asignar'
       }
-      const res = await fetch('http://localhost:3001/tasks', {
+      const res = await fetch('http://3001/tasks', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newTask),
@@ -63,6 +71,7 @@ export default function ProyectoDetallePage() {
       setTasks([...tasks, createdTask])
       setNewTaskTitle('')
       setNewTaskDescription('')
+      setNewTaskAssignedTo('')
       setSuccessMessage('Tarea creada con éxito.')
     } catch (err) {
       setNewTaskError(err.message || 'Hubo un problema al crear la tarea.')
@@ -102,6 +111,41 @@ export default function ProyectoDetallePage() {
     }
   }
 
+  // NUEVA FUNCIÓN PARA ABRIR EL MODAL DE EDICIÓN
+  const handleEditClick = (task) => {
+    setTaskToEdit(task)
+    setEditFormTitle(task.title)
+    setEditFormDescription(task.description)
+    setShowEditModal(true)
+  }
+
+  // NUEVA FUNCIÓN PARA GUARDAR LOS CAMBIOS DE EDICIÓN
+  const handleSaveChanges = async (e) => {
+    e.preventDefault()
+    if (!taskToEdit) return
+
+    try {
+      const res = await fetch(`http://localhost:3001/tasks/${taskToEdit.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: editFormTitle,
+          description: editFormDescription,
+        }),
+      })
+
+      if (!res.ok) throw new Error('Error al actualizar la tarea.')
+
+      const updatedTask = await res.json()
+      setTasks(tasks.map(t => (t.id === updatedTask.id ? updatedTask : t)))
+      setSuccessMessage('Tarea actualizada con éxito.')
+      setShowEditModal(false)
+      setTaskToEdit(null)
+    } catch (err) {
+      setNewTaskError(err.message || 'Hubo un problema al actualizar la tarea.')
+    }
+  }
+
   if (loading) return <Container className="mt-5 text-center">Cargando proyecto y tareas...</Container>
   if (error) return <Container className="mt-5"><Alert variant="danger">{error}</Alert></Container>
 
@@ -119,7 +163,7 @@ export default function ProyectoDetallePage() {
       {successMessage && <Alert variant="success" onClose={() => setSuccessMessage(null)} dismissible>{successMessage}</Alert>}
       {newTaskError && <Alert variant="danger" onClose={() => setNewTaskError(null)} dismissible>{newTaskError}</Alert>}
 
-      {/* FORM NUEVA TAREA */}
+      {/* FORMULARIO NUEVA TAREA */}
       <Row className="mb-5">
         <Col md={{ span: 8, offset: 2 }}>
           <Card className="shadow-lg border-0">
@@ -147,6 +191,15 @@ export default function ProyectoDetallePage() {
                     placeholder="Describe la tarea aquí..."
                   />
                 </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label className="fw-semibold">Asignar a:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={newTaskAssignedTo}
+                    onChange={(e) => setNewTaskAssignedTo(e.target.value)}
+                    placeholder="Nombre del usuario (opcional)"
+                  />
+                </Form.Group>
                 <div className="d-grid">
                   <Button type="submit" variant="primary" size="lg" disabled={loadingNewTask}>
                     {loadingNewTask ? 'Creando...' : 'Crear Tarea'}
@@ -157,6 +210,8 @@ export default function ProyectoDetallePage() {
           </Card>
         </Col>
       </Row>
+
+      <hr />
 
       {/* LISTA DE TAREAS */}
       <h2 className="text-center mb-4 fw-bold text-secondary">📋 Tareas del Proyecto</h2>
@@ -190,16 +245,26 @@ export default function ProyectoDetallePage() {
                     >
                       {task.completed ? '✅ Completada' : 'Marcar como completada'}
                     </Button>
-                    <Button
-                      variant="outline-danger"
-                      size="sm"
-                      onClick={() => {
-                        setTaskToDelete(task.id)
-                        setShowDeleteConfirm(true)
-                      }}
-                    >
-                      🗑 Eliminar
-                    </Button>
+                    <div className="ms-auto d-flex">
+                      <Button
+                        variant="outline-secondary"
+                        size="sm"
+                        className="me-2"
+                        onClick={() => handleEditClick(task)}
+                      >
+                        ✏️ Editar
+                      </Button>
+                      <Button
+                        variant="outline-danger"
+                        size="sm"
+                        onClick={() => {
+                          setTaskToDelete(task.id)
+                          setShowDeleteConfirm(true)
+                        }}
+                      >
+                        🗑 Eliminar
+                      </Button>
+                    </div>
                   </div>
                 </Card.Body>
               </Card>
@@ -207,6 +272,44 @@ export default function ProyectoDetallePage() {
           ))}
         </Row>
       )}
+
+      {/* MODAL DE EDICIÓN */}
+      <Modal show={showEditModal} onHide={() => setShowEditModal(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title className="text-secondary">✏️ Editar Tarea</Modal.Title>
+        </Modal.Header>
+        <Form onSubmit={handleSaveChanges}>
+          <Modal.Body>
+            <Form.Group className="mb-3">
+              <Form.Label className="fw-semibold">Título</Form.Label>
+              <Form.Control
+                type="text"
+                value={editFormTitle}
+                onChange={(e) => setEditFormTitle(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label className="fw-semibold">Descripción</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                value={editFormDescription}
+                onChange={(e) => setEditFormDescription(e.target.value)}
+                required
+              />
+            </Form.Group>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => setShowEditModal(false)}>
+              Cancelar
+            </Button>
+            <Button variant="primary" type="submit">
+              Guardar Cambios
+            </Button>
+          </Modal.Footer>
+        </Form>
+      </Modal>
 
       {/* MODAL ELIMINACIÓN */}
       <Modal show={showDeleteConfirm} onHide={() => setShowDeleteConfirm(false)} centered>
