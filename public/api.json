@@ -19,20 +19,20 @@
       "role": "user"
     },
     {
-      "id": "6225",
-      "username": "alvaro1234",
-      "password": "alvaro1234",
-      "role": "user"
-    },
-    {
-      "id": "9d64",
-      "username": "alvaro",
+      "id": "a0f0",
+      "username": "Ricardo",
       "password": "1234",
       "role": "user"
     },
     {
-      "id": "dbef",
-      "username": "dav",
+      "id": null,
+      "username": "ricardo",
+      "password": "1234",
+      "role": "user"
+    },
+    {
+      "id": null,
+      "username": "freddy",
       "password": "1234",
       "role": "user"
     }
@@ -49,34 +49,6 @@
       "id": "e657",
       "name": "dgfg45",
       "description": "dgdg45",
-      "managerId": 1,
-      "generalProgress": 0
-    },
-    {
-      "id": "c230",
-      "name": "dprueba 4",
-      "description": "dprueba 4",
-      "managerId": 1,
-      "generalProgress": 0
-    },
-    {
-      "id": "0aec",
-      "name": "dsp",
-      "description": "dsp",
-      "managerId": 1,
-      "generalProgress": 0
-    },
-    {
-      "id": "3b9f",
-      "name": "creaccion del login",
-      "description": "asdd",
-      "managerId": 1,
-      "generalProgress": 0
-    },
-    {
-      "id": "17c3",
-      "name": "registrar",
-      "description": "123",
       "managerId": 1,
       "generalProgress": 0
     },
@@ -112,17 +84,17 @@
     },
     {
       "id": "33ac",
-      "title": "prueba 3",
+      "title": "prueba 2",
       "description": "prueba 3",
       "projectId": "1840",
-      "completed": true
+      "completed": false
     },
     {
       "id": "52b8",
       "title": "tareas2",
       "description": "tareas2",
       "projectId": "e657",
-      "completed": false
+      "completed": true
     },
     {
       "id": "f7f4",

@@ -26,7 +26,7 @@ export default function DashboardPage() {
   }
   useEffect(() => {
     setLoading(true)
-    fetch('/data.json')
+    fetch('/api.json')
       .then((res) => {
         if (!res.ok) throw new Error('Error al cargar data.json')
         return res.json()
@@ -57,21 +57,20 @@ export default function DashboardPage() {
     )
   }
 
-  // conteos para el gráfico
-  const pendientes = data.tareas.filter((t) => t.estado === 'Pendiente').length
-  const completadas = data.tareas.filter((t) => t.estado === 'Completada').length
+  // Conteos para el gráfico
+  const pendientes = data.tasks.filter((t) => !t.completed).length
+  const completadas = data.tasks.filter((t) => t.completed).length
 
   const chartData = [
-    { name: 'Pendientes', value: pendientes },
-    { name: 'Completadas', value: completadas }
+    { name: 'Pendientes', value: pendientes, fill: '#dc3545' },
+    { name: 'Completadas', value: completadas, fill: '#28a745' }
   ]
 
-
   return (
-      <Container className="mt-4">
+    <Container className="mt-4">
       <div className="d-flex justify-content-between align-items-center mb-4">
-      <h2>Panel de Control</h2>
-      <Button variant="danger" onClick={handleLogout}>Salir</Button>
+        <h2>Panel de Control</h2>
+        <Button variant="danger" onClick={handleLogout}>Salir</Button>
       </div>
       
       <Row className="mt-4">
@@ -79,7 +78,7 @@ export default function DashboardPage() {
           <Card>
             <Card.Body>
               <Card.Title>Proyectos</Card.Title>
-              <Card.Text>Tienes {data.proyectos.length} proyecto(s)</Card.Text>
+              <Card.Text>Tienes {data.projects.length} proyecto(s)</Card.Text>
               <Link href="/proyectos/" className="text-decoration-none">
                 <Button variant="primary">Ver proyectos</Button>
               </Link>
@@ -113,7 +112,8 @@ export default function DashboardPage() {
                 <YAxis allowDecimals={false} />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="value" fill="#0d6efd" />
+                <Bar dataKey="value" fill="#dc3545" />
+                <Bar dataKey="value" fill="#28a745" />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -122,4 +122,3 @@ export default function DashboardPage() {
     </Container>
   )
 }
-
