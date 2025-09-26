@@ -29,6 +29,12 @@
       "username": "alvaro",
       "password": "1234",
       "role": "user"
+    },
+    {
+      "id": "f38a",
+      "username": "dav",
+      "password": "1234",
+      "role": "user"
     }
   ],
   "projects": [
