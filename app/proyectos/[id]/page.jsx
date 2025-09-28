@@ -1,10 +1,11 @@
 'use client'
+import { useParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { Container, Card, Button, Row, Col, Alert, Form, Modal } from 'react-bootstrap'
 
 export default function ProyectoDetallePage() {
-  const id = typeof window !== 'undefined' ? window.location.pathname.split('/').pop() : ''
-
+  //const id = typeof window !== 'undefined' ? window.location.pathname.split('/').pop() : ''
+  const { id } = useParams()
   const [proyecto, setProyecto] = useState(null)
   const [tasks, setTasks] = useState([])
   const [loading, setLoading] = useState(true)
