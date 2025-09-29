@@ -35,6 +35,12 @@
       "username": "freddy",
       "password": "1234",
       "role": "user"
+    },
+    {
+      "id": "c35f",
+      "username": "dav",
+      "password": "1234",
+      "role": "user"
     }
   ],
   "projects": [
