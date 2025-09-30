@@ -64,6 +64,27 @@
       "description": "javascript\n",
       "managerId": 1,
       "generalProgress": 0
+    },
+    {
+      "id": "d8af",
+      "name": "Tarea 5",
+      "description": "CRUD",
+      "managerId": 1,
+      "generalProgress": 0
+    },
+    {
+      "id": "fdf5",
+      "name": "ddd",
+      "description": "ddd",
+      "managerId": 1,
+      "generalProgress": 0
+    },
+    {
+      "id": "b081",
+      "name": "aaaa",
+      "description": "aaaaa",
+      "managerId": 1,
+      "generalProgress": 0
     }
   ],
   "tasks": [
@@ -114,14 +135,23 @@
       "title": "crear login ",
       "description": "crear login ",
       "projectId": "d595",
-      "completed": false
+      "completed": true
     },
     {
-      "id": "d6f2",
-      "title": "Diseño de vistas",
-      "description": "Diseño de vistas",
-      "projectId": "d595",
-      "completed": true
+      "id": "7d1c",
+      "title": "aa",
+      "description": "aaa",
+      "projectId": null,
+      "completed": false,
+      "assignedTo": "aaa"
+    },
+    {
+      "id": "dea6",
+      "title": "lo que sea",
+      "description": "hqjweqewq",
+      "projectId": null,
+      "completed": false,
+      "assignedTo": "wqerqwrew"
     }
   ]
 }
